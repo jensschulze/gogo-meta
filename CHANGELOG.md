@@ -1,3 +1,18 @@
+# [2.0.0](https://github.com/daFish/gogo-meta/compare/v1.8.0...v2.0.0) (2026-05-30)
+
+
+* refactor!: remove legacy .looprc support ([fc0102d](https://github.com/daFish/gogo-meta/commit/fc0102dca6f07b5529e8943e2d1298502c806310))
+
+
+### BREAKING CHANGES
+
+* `.looprc` is no longer read. A repository that relied on a
+`.looprc` ignore list to exclude directories from `exec`/`run`/`git`/`npm` will
+now run those commands against the previously-excluded directories. Replace it
+with the `--exclude-only`/`--exclude-pattern` filters, or remove the entries
+from the `projects` map in `.gogo`. `gogo validate` also no longer validates
+`.looprc` files.
+
 # [1.8.0](https://github.com/daFish/gogo-meta/compare/v1.7.0...v1.8.0) (2026-05-30)
 
 
