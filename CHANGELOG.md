@@ -1,3 +1,11 @@
+# [1.8.0](https://github.com/daFish/gogo-meta/compare/v1.7.0...v1.8.0) (2026-05-30)
+
+
+### Features
+
+* **migrate:** keep .gitignore in sync when moving repos ([f2522b7](https://github.com/daFish/gogo-meta/commit/f2522b77f6d99a54496dffb55e4756fa13b86112))
+* **migrate:** reconcile the working copy with the configuration ([8e8c05f](https://github.com/daFish/gogo-meta/commit/8e8c05f09235dc7af2e01aefff1f701add8555ac))
+
 # [1.7.0](https://github.com/daFish/gogo-meta/compare/v1.6.0...v1.7.0) (2026-05-30)
 
 
