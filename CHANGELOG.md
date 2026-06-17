@@ -71,6 +71,64 @@ from the `projects` map in `.gogo`. `gogo validate` also no longer validates
 
 * add imported projects to gitignore ([e56f38e](https://github.com/daFish/gogo-meta/commit/e56f38e59064de59a6237d9904790e489fde7605))
 
+## [3.0.0](https://github.com/jensschulze/gogo-meta/compare/v2.0.0...v3.0.0) (2026-06-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* `.looprc` is no longer read. A repository that relied on a `.looprc` ignore list to exclude directories from `exec`/`run`/`git`/`npm` will now run those commands against the previously-excluded directories. Replace it with the `--exclude-only`/`--exclude-pattern` filters, or remove the entries from the `projects` map in `.gogo`. `gogo validate` also no longer validates `.looprc` files.
+
+### Features
+
+* add imported projects to gitignore ([e56f38e](https://github.com/jensschulze/gogo-meta/commit/e56f38e59064de59a6237d9904790e489fde7605))
+* add option --no-clone when importing projects ([450ef99](https://github.com/jensschulze/gogo-meta/commit/450ef99a22b4d89ffcd8a3365e3ddff540950064))
+* add option to validate configuration files ([53353ea](https://github.com/jensschulze/gogo-meta/commit/53353ea0b4a02a73722442c782171af032386323))
+* add semantic release ([80d32dc](https://github.com/jensschulze/gogo-meta/commit/80d32dcfb03dcaf5d192fda8559ede56ef2328c0))
+* add support for pre-defined commands ([a634273](https://github.com/jensschulze/gogo-meta/commit/a634273b296f29485a1ce4fefe710fdc995cc11f))
+* build a container image if a new release was published ([eb055e1](https://github.com/jensschulze/gogo-meta/commit/eb055e1aa05638e97b0c1c90793f80f07faa233b))
+* **cli:** add -f/--file global option for overlay configs ([02ef2ca](https://github.com/jensschulze/gogo-meta/commit/02ef2ca77e752a1b6df90896c04c6cafed05485d))
+* **config:** add overlay config merging and multi-file support ([d1335c1](https://github.com/jensschulze/gogo-meta/commit/d1335c14e9d11a400a69e9b1fc1ecfc3a8ae53f3))
+* **config:** add YAML support for .gogo configuration files ([d298ebc](https://github.com/jensschulze/gogo-meta/commit/d298ebcfc0f958bf821cbe573483bc4b907f6411))
+* display a list of failed projects after git pull ([02394a0](https://github.com/jensschulze/gogo-meta/commit/02394a00e1a11274ad981fa827965f148f1dd1eb))
+* **init:** add --format flag to choose JSON or YAML config ([c2117bb](https://github.com/jensschulze/gogo-meta/commit/c2117bba37bb1f4e2ba56d6d95362cc59e8bafe3))
+* initial commit ([f2dfb85](https://github.com/jensschulze/gogo-meta/commit/f2dfb859dbd1717cd3dfda316b156d3328a8d758))
+* **migrate:** keep .gitignore in sync when moving repos ([f2522b7](https://github.com/jensschulze/gogo-meta/commit/f2522b77f6d99a54496dffb55e4756fa13b86112))
+* **migrate:** reconcile the working copy with the configuration ([8e8c05f](https://github.com/jensschulze/gogo-meta/commit/8e8c05f09235dc7af2e01aefff1f701add8555ac))
+* **validate:** check configured projects exist in the working copy ([487786e](https://github.com/jensschulze/gogo-meta/commit/487786ec7e3608c7a27fd6914c3d0b113ad1a971))
+
+
+### Bug Fixes
+
+* add helper function to fix build errors on different platforms ([2293228](https://github.com/jensschulze/gogo-meta/commit/22932284c8f509f9ea135eb4a0004c1f1724a7e3))
+* add SSH host key verification before cloning repositories ([3aba347](https://github.com/jensschulze/gogo-meta/commit/3aba3479ccad8ee2bce6f5a13c36117d3a110bb5)), closes [#12](https://github.com/jensschulze/gogo-meta/issues/12)
+* **ci:** match release-please tags to existing v-prefixed history ([e0b777f](https://github.com/jensschulze/gogo-meta/commit/e0b777fb084450ff6f189b2c67a94bcec3c14806))
+* **deps:** update dependency commander to v14 ([717ebd0](https://github.com/jensschulze/gogo-meta/commit/717ebd09e2aeb4c1ca4e170a6cc388e2bb59e29a))
+* **deps:** update dependency commander to v15 ([e1ac724](https://github.com/jensschulze/gogo-meta/commit/e1ac7242c75b6316aca54a40990f76279522a88a))
+* **deps:** update dependency zod to v4 ([f8541e7](https://github.com/jensschulze/gogo-meta/commit/f8541e73001f1860b65d0ede64186999d968ef3d))
+* handle timeouts on linux platforms better ([670dbbb](https://github.com/jensschulze/gogo-meta/commit/670dbbbd394090cd97e2768ea8a778f199cd7b5d))
+* **project:** pass empty overlay list on write to prevent absorption ([b637bf0](https://github.com/jensschulze/gogo-meta/commit/b637bf01a67fde0855e65894f918f458490e3cea))
+
+
+### Code Refactoring
+
+* remove gitlab usage/mentions ([6722274](https://github.com/jensschulze/gogo-meta/commit/6722274c2d3a96eed544a393242863a654b20fe2))
+* remove legacy .looprc support ([fc0102d](https://github.com/jensschulze/gogo-meta/commit/fc0102dca6f07b5529e8943e2d1298502c806310))
+* update commands for new readMetaConfig return type ([1694a29](https://github.com/jensschulze/gogo-meta/commit/1694a29245e60b7486acf18b9afa4e211a2e1943))
+
+
+### Documentation
+
+* document -f/--file multi-config support ([9a08f39](https://github.com/jensschulze/gogo-meta/commit/9a08f3986ad611553892f4afd8977bb1fd98972a))
+* document YAML configuration support ([bf177b4](https://github.com/jensschulze/gogo-meta/commit/bf177b4ce69afb994d954fbbc2d4687447f890cb))
+* make sure bun is mentioned ([eebbda1](https://github.com/jensschulze/gogo-meta/commit/eebbda18aa8f65fac2a022154b91724f28541b11))
+
+
+### Build System
+
+* add .serena as mcp ([eab583b](https://github.com/jensschulze/gogo-meta/commit/eab583b8029aa85a5f582ca5dd51c1593c0ec1b4))
+* add missing fields in package.json ([b04008b](https://github.com/jensschulze/gogo-meta/commit/b04008bb2a0505e2e1ba9800c7c30364f2ae8573))
+* switch to bun ([54763dd](https://github.com/jensschulze/gogo-meta/commit/54763dd21d046f4a850b98c3391ea8547d6ee6b5))
+
 ## [1.1.1](https://github.com/daFish/gogo-meta/compare/v1.1.0...v1.1.1) (2026-01-27)
 
 
