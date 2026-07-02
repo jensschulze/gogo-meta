@@ -34,6 +34,10 @@ func runGitUpdate(cmd *cobra.Command, _ []string) error {
 		return err
 	}
 
+	if err := syncLocalExcludes(metaDir, configResult.LocalProjects); err != nil {
+		return err
+	}
+
 	filterOpts, err := resolveFilterOptions(cmd)
 	if err != nil {
 		return err
