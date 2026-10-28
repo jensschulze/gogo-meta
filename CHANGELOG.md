@@ -71,6 +71,103 @@ from the `projects` map in `.gogo`. `gogo validate` also no longer validates
 
 * add imported projects to gitignore ([e56f38e](https://github.com/daFish/gogo-meta/commit/e56f38e59064de59a6237d9904790e489fde7605))
 
+## [4.0.0](https://github.com/jensschulze/gogo-meta/compare/v3.2.0...v4.0.0) (2026-10-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* **config:** config files that loaded before may now be rejected: unknown keys at any level (including annotations such as `_comment`, JSON keys in another case such as `Projects`, and YAML anchor holders such as `x-defaults:`), repeated keys in JSON, YAML values of the wrong type (unquoted numbers or booleans where a string is expected, `yes`/`no` for booleans, fractional `concurrency`), and YAML documents whose aliases expand beyond yaml.v3's limits.
+* rewrite the tool in Go (until 6ae349af)
+* `.looprc` is no longer read. A repository that relied on a `.looprc` ignore list to exclude directories from `exec`/`run`/`git`/`npm` will now run those commands against the previously-excluded directories. Replace it with the `--exclude-only`/`--exclude-pattern` filters, or remove the entries from the `projects` map in `.gogo`. `gogo validate` also no longer validates `.looprc` files.
+
+### Features
+
+* add imported projects to gitignore ([e56f38e](https://github.com/jensschulze/gogo-meta/commit/e56f38e59064de59a6237d9904790e489fde7605))
+* add option --no-clone when importing projects ([450ef99](https://github.com/jensschulze/gogo-meta/commit/450ef99a22b4d89ffcd8a3365e3ddff540950064))
+* add option to validate configuration files ([53353ea](https://github.com/jensschulze/gogo-meta/commit/53353ea0b4a02a73722442c782171af032386323))
+* add project groups and --group filter ([cc2cfcd](https://github.com/jensschulze/gogo-meta/commit/cc2cfcd11dae9a3f97d7b3d737f9b366156adf4d))
+* add semantic release ([80d32dc](https://github.com/jensschulze/gogo-meta/commit/80d32dcfb03dcaf5d192fda8559ede56ef2328c0))
+* add support for pre-defined commands ([a634273](https://github.com/jensschulze/gogo-meta/commit/a634273b296f29485a1ce4fefe710fdc995cc11f))
+* build a container image if a new release was published ([eb055e1](https://github.com/jensschulze/gogo-meta/commit/eb055e1aa05638e97b0c1c90793f80f07faa233b))
+* **cli:** add -f/--file global option for overlay configs ([02ef2ca](https://github.com/jensschulze/gogo-meta/commit/02ef2ca77e752a1b6df90896c04c6cafed05485d))
+* **cli:** add gogo update to converge the working copy in one run ([f713cc9](https://github.com/jensschulze/gogo-meta/commit/f713cc968dddc68ec04f1f93dadb8ffe3e6cf8d1))
+* **cli:** show a progress spinner while gogo update works ([8a2a4e1](https://github.com/jensschulze/gogo-meta/commit/8a2a4e1f0f1e8d743d1cb06af6b092d2ae767075))
+* **config:** add overlay config merging and multi-file support ([d1335c1](https://github.com/jensschulze/gogo-meta/commit/d1335c14e9d11a400a69e9b1fc1ecfc3a8ae53f3))
+* **config:** add YAML support for .gogo configuration files ([d298ebc](https://github.com/jensschulze/gogo-meta/commit/d298ebcfc0f958bf821cbe573483bc4b907f6411))
+* **config:** auto-merge .gogo.local overlay in global mode ([1673c4c](https://github.com/jensschulze/gogo-meta/commit/1673c4ced423f3071222666e826f0e8c37bfba36))
+* **config:** validate config files against a JSON Schema ([72bc126](https://github.com/jensschulze/gogo-meta/commit/72bc126cb68e1a2a1bed4c7c1ba0f3ca15805052))
+* display a list of failed projects after git pull ([02394a0](https://github.com/jensschulze/gogo-meta/commit/02394a00e1a11274ad981fa827965f148f1dd1eb))
+* **gitstate:** add read-only git inspection and fast-forward plumbing ([94a5e16](https://github.com/jensschulze/gogo-meta/commit/94a5e16ff6a733d6d15df7dd6da9a6d65539e985))
+* **init:** add --format flag to choose JSON or YAML config ([c2117bb](https://github.com/jensschulze/gogo-meta/commit/c2117bba37bb1f4e2ba56d6d95362cc59e8bafe3))
+* initial commit ([f2dfb85](https://github.com/jensschulze/gogo-meta/commit/f2dfb859dbd1717cd3dfda316b156d3328a8d758))
+* **migrate:** keep .gitignore in sync when moving repos ([f2522b7](https://github.com/jensschulze/gogo-meta/commit/f2522b77f6d99a54496dffb55e4756fa13b86112))
+* **migrate:** reconcile the working copy with the configuration ([8e8c05f](https://github.com/jensschulze/gogo-meta/commit/8e8c05f09235dc7af2e01aefff1f701add8555ac))
+* **validate:** check configured projects exist in the working copy ([487786e](https://github.com/jensschulze/gogo-meta/commit/487786ec7e3608c7a27fd6914c3d0b113ad1a971))
+
+
+### Bug Fixes
+
+* add helper function to fix build errors on different platforms ([2293228](https://github.com/jensschulze/gogo-meta/commit/22932284c8f509f9ea135eb4a0004c1f1724a7e3))
+* add SSH host key verification before cloning repositories ([3aba347](https://github.com/jensschulze/gogo-meta/commit/3aba3479ccad8ee2bce6f5a13c36117d3a110bb5)), closes [#12](https://github.com/jensschulze/gogo-meta/issues/12)
+* **ci:** attach release artifacts before the release is published ([e5ef699](https://github.com/jensschulze/gogo-meta/commit/e5ef699a3d88059e65f5bcfc1246bc87b5a301d0))
+* **ci:** emit postflight_steps instead of the deprecated postflight stanza ([93f1224](https://github.com/jensschulze/gogo-meta/commit/93f12246d0f8d3f0d110cd5fcb725c7a3dd5749a))
+* **ci:** match release-please tags to existing v-prefixed history ([e0b777f](https://github.com/jensschulze/gogo-meta/commit/e0b777fb084450ff6f189b2c67a94bcec3c14806))
+* **cli:** announce the merged overlays once when --group is used ([3c698cb](https://github.com/jensschulze/gogo-meta/commit/3c698cb0fa3e40f1d48a4bf49b4710fe9ae5f4d1))
+* **cli:** honor --parallel and --concurrency in gogo git update ([6a7e849](https://github.com/jensschulze/gogo-meta/commit/6a7e84991758f26d7a2e951b9d532a32b7d51747))
+* **cli:** point every missing-directory hint at gogo update ([628447f](https://github.com/jensschulze/gogo-meta/commit/628447fd726cf6ec7cb9c4558fde5fec336bd269))
+* **cli:** reject positional arguments on gogo git update ([f82866a](https://github.com/jensschulze/gogo-meta/commit/f82866a9cb25628e8afd6001f4b8d39fc69ef7be))
+* **cli:** return the real run's exit code from gogo migrate --dry-run ([0211631](https://github.com/jensschulze/gogo-meta/commit/0211631ba55dae00fd0b81636d1678a71b848a9d))
+* **config:** apply the config ownership guard to the auto-loaded .gogo.local ([ade34cd](https://github.com/jensschulze/gogo-meta/commit/ade34cdb28b6dbe050d670cfb1a247d5fc8fe588))
+* **config:** refuse .gogo config owned by another user ([b57d55e](https://github.com/jensschulze/gogo-meta/commit/b57d55ee1a3382c439e33bb9aa3d00a012adb1a2)), closes [#59](https://github.com/jensschulze/gogo-meta/issues/59)
+* **deps:** update dependency commander to v14 ([717ebd0](https://github.com/jensschulze/gogo-meta/commit/717ebd09e2aeb4c1ca4e170a6cc388e2bb59e29a))
+* **deps:** update dependency commander to v15 ([e1ac724](https://github.com/jensschulze/gogo-meta/commit/e1ac7242c75b6316aca54a40990f76279522a88a))
+* **deps:** update dependency zod to v4 ([f8541e7](https://github.com/jensschulze/gogo-meta/commit/f8541e73001f1860b65d0ede64186999d968ef3d))
+* **deps:** update module github.com/mattn/go-isatty to v0.0.24 ([20d23f6](https://github.com/jensschulze/gogo-meta/commit/20d23f6e32ea9b39da3fd895d0756e7e39019b0c))
+* **deps:** update module github.com/stretchr/testify to v1.12.1 ([e0d292b](https://github.com/jensschulze/gogo-meta/commit/e0d292b705473cd66d7bd4f585793febd17e7e36))
+* **giturl:** validate git URLs before handing them to git ([68eecfa](https://github.com/jensschulze/gogo-meta/commit/68eecfa7d8a216f5544a9b10a79c25a05ce9d21a)), closes [#63](https://github.com/jensschulze/gogo-meta/issues/63)
+* handle timeouts on linux platforms better ([670dbbb](https://github.com/jensschulze/gogo-meta/commit/670dbbbd394090cd97e2768ea8a778f199cd7b5d))
+* **loop:** report configured projects whose directory is missing ([9bdd399](https://github.com/jensschulze/gogo-meta/commit/9bdd39946d1a47b1bc89c8893d589d1588233575))
+* **npm:** prevent path escapes in `npm link --all` ([9e9b237](https://github.com/jensschulze/gogo-meta/commit/9e9b237cf2b74e4b1c088797fae41329eb13afad)), closes [#58](https://github.com/jensschulze/gogo-meta/issues/58)
+* **output:** strip control characters from untrusted terminal text ([51d61c7](https://github.com/jensschulze/gogo-meta/commit/51d61c719e5a8872ae899618b9be35ad22904757)), closes [#65](https://github.com/jensschulze/gogo-meta/issues/65)
+* **project:** pass empty overlay list on write to prevent absorption ([b637bf0](https://github.com/jensschulze/gogo-meta/commit/b637bf01a67fde0855e65894f918f458490e3cea))
+* **ssh:** stop auto-adding scanned host keys to known_hosts ([2d66c40](https://github.com/jensschulze/gogo-meta/commit/2d66c400b99e58a1aa730ac156c60b3bacd217cd)), closes [#60](https://github.com/jensschulze/gogo-meta/issues/60) [#64](https://github.com/jensschulze/gogo-meta/issues/64)
+* **validate:** resolve group references against all discovered config files ([0133dc4](https://github.com/jensschulze/gogo-meta/commit/0133dc4bb830b0373d1c21d97fc49a3778b260c6))
+
+
+### Code Refactoring
+
+* address review feedback on project groups ([9b555ad](https://github.com/jensschulze/gogo-meta/commit/9b555ada0f5be1623c3492d904b6853851477470))
+* clean up the rewrite (dead code, typed Loop, ssh DI, parallel fix) ([d7f0071](https://github.com/jensschulze/gogo-meta/commit/d7f00713df38043f707930642ab0aec5b68570a4))
+* **cli:** split gogo migrate into a plan and an apply step ([e38b28b](https://github.com/jensschulze/gogo-meta/commit/e38b28b15cf66174f630f247ceb8f0d78df4e87c))
+* implement recent changes in Go (until 44344a19) ([a243633](https://github.com/jensschulze/gogo-meta/commit/a2436336651025f36040a3d94f7ba0e2e85d8d1e))
+* remove gitlab usage/mentions ([6722274](https://github.com/jensschulze/gogo-meta/commit/6722274c2d3a96eed544a393242863a654b20fe2))
+* remove legacy .looprc support ([fc0102d](https://github.com/jensschulze/gogo-meta/commit/fc0102dca6f07b5529e8943e2d1298502c806310))
+* rewrite the tool in Go (until 6ae349af) ([6a33235](https://github.com/jensschulze/gogo-meta/commit/6a33235f409e18035aba5258aad7d1a71fe80ee7))
+* **security:** use shell-free built-ins and improve signal handling (diverges from TS version) ([4e9ebee](https://github.com/jensschulze/gogo-meta/commit/4e9ebeed1588a2067ba332e8fd40335053de0865))
+* update commands for new readMetaConfig return type ([1694a29](https://github.com/jensschulze/gogo-meta/commit/1694a29245e60b7486acf18b9afa4e211a2e1943))
+
+
+### Documentation
+
+* add the implementation design for gogo update ([9a88364](https://github.com/jensschulze/gogo-meta/commit/9a88364595bc2e9bcdf3f27220f2395d75fba395))
+* add v3 upgrade guide ([2ca51da](https://github.com/jensschulze/gogo-meta/commit/2ca51dab4fb8b32b4c4021951fda16d9e6f4ee6e))
+* document -f/--file multi-config support ([9a08f39](https://github.com/jensschulze/gogo-meta/commit/9a08f3986ad611553892f4afd8977bb1fd98972a))
+* document gogo update ([dc4eb7c](https://github.com/jensschulze/gogo-meta/commit/dc4eb7cec63b42c336927a3375c4f801b49466bb))
+* document YAML configuration support ([bf177b4](https://github.com/jensschulze/gogo-meta/commit/bf177b4ce69afb994d954fbbc2d4687447f890cb))
+* link upgrade guide from README ([818f789](https://github.com/jensschulze/gogo-meta/commit/818f789195cb4af1164b928c150c39bd9855ff66))
+* make sure bun is mentioned ([eebbda1](https://github.com/jensschulze/gogo-meta/commit/eebbda18aa8f65fac2a022154b91724f28541b11))
+* record the Phase 1 outcome and settle the unborn-branch question ([c987f1d](https://github.com/jensschulze/gogo-meta/commit/c987f1dba52ebcc1e20fc83106ca536dcf96c5b8))
+* **security:** document the trust model for gogo run/exec ([cfeed44](https://github.com/jensschulze/gogo-meta/commit/cfeed445001f0dff89807e5ed2b79922a24ed7c1)), closes [#61](https://github.com/jensschulze/gogo-meta/issues/61)
+
+
+### Build System
+
+* add .serena as mcp ([eab583b](https://github.com/jensschulze/gogo-meta/commit/eab583b8029aa85a5f582ca5dd51c1593c0ec1b4))
+* add missing fields in package.json ([b04008b](https://github.com/jensschulze/gogo-meta/commit/b04008bb2a0505e2e1ba9800c7c30364f2ae8573))
+* **deps:** require Go 1.26.10 for the net/url fix (GO-2026-6218) ([0f5230f](https://github.com/jensschulze/gogo-meta/commit/0f5230f1a9bc5e9128964ca4facfaf4aaae5c8f7))
+* **deps:** switch to the maintained YAML fork go.yaml.in/yaml/v3 ([87e9a60](https://github.com/jensschulze/gogo-meta/commit/87e9a6007ad877f1300f86296502d223acda605d))
+* switch to bun ([54763dd](https://github.com/jensschulze/gogo-meta/commit/54763dd21d046f4a850b98c3391ea8547d6ee6b5))
+
 ## [3.2.0](https://github.com/daFish/gogo-meta/compare/v3.1.1...v3.2.0) (2026-09-11)
 
 
